@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="Description"
+      content="A single page weather application practice project submitted in partial fufilment of the requirements for participating in the google africa developer scholarship programme"
+    />
+    <meta name="apple-mobile-web-app-status-bar" content="#05386b" />
+    <meta name="theme-color" content="#05386b" />
+    <title>Creativogee Weather App</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="./images/icons/face-72x72.png"
+    />
+    <link rel="apple-touch-icon" href="/images/icons/face-192x192.png" />
+  </head>
+  <body>
+    <!-- the landing page -->
+    <header class="header invisible">
+      <h2 class="header-logo">Creativogee</h2>
+      <h4>Weather App</h4>
+    </header>
+    <section class="landing-page-container">
+      <div class="flexer">
+        <div class="app-desc-CTA-wrapper">
+          <h1 id="logo" class="logo">Creativogee</h1>
+          <h2>Weather App</h2>
+          <h3 class="button get-started-button">Get Started</h3>
+        </div>
+
+        <div class="input-field invisible">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Enter a city..."
+          />
+          <div class="icon-wrapper arrow-icon-wrapper invisible">
+            <img class="arrow-icon" src="./images/right-arrow.svg" alt="" />
+          </div>
+        </div>
+      </div>
+      <p class="empty-input-error-msg hidden">Please enter a city</p>
+    </section>
+
+    <!-- the result page -->
+
+    <section class="present-search-result invisible">
+      <div class="city-date">
+        <div class="city">loading...</div>
+        <div class="date"></div>
+        <div class="time"></div>
+      </div>
+      <div class="weather-card">
+        <span class="temp temp-wrapper"></span>
+        <figure>
+          <img class="weather-icon" src="" />
+          <figcaption class="weather-desc"></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div id="hr" class="hidden">
+      <h4 class="prev-ser-head">Previous Search</h4>
+      <img class="cancel" src="./images/close.svg" alt="" />
+    </div>
+
+    <!-- Previous searches -->
+    <div class="recent-search-veil">
+      <section class="recent-search-results-container">
+        <!-- <div class="recent-search-result">
+        <div class="prev-weather-card">
+        <div class="city-mini"></div>
+        <span class="temp temp-wrapper-mini"></span>
+          <figure>
+            <img class="weather-icon-mini" src=""/>
+            <figcaption class="weather-desc"></figcaption>
+          </figure>
+        </div>
+        </div> -->
+      </section>
+    </div>
+
+    <!--the error page -->
+    <section class="page-ptng error-page invisible">
+      <h1 id="logo">Creativogee</h1>
+      <h2>Weather App</h2>
+      <div class="message">
+        <h1 class="heading">Oops!</h1>
+        <h3>Please enter a valid city or check your internet</h3>
+      </div>
+      <h3 class="button go-home">Go Home</h3>
+    </section>
+    <script src="/config.js"></script>
+    <script src="/js/ui.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
