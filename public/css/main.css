@@ -35,7 +35,7 @@ body {
 
 #logo,
 .logo {
-  font-family: "Ultra", serif;
+  font-family: 'Ultra', serif;
   font-size: 3.5rem;
   color: #379683;
 }
@@ -142,6 +142,7 @@ body {
 }
 
 .cancel {
+  cursor: pointer;
   margin-top: -5px;
   width: 40px;
   height: 40px;
