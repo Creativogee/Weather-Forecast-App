@@ -10,6 +10,7 @@ const api = {
 const landingPage = document.querySelector('.landing-page-container');
 const presentResult = document.querySelector('.present-search-result');
 const errPage = document.querySelector('.error-page');
+let message = document.querySelector('.message');
 let previousSearch = document.querySelector('.recent-search-results-container');
 
 //Other
@@ -99,9 +100,13 @@ function getResult(query) {
     })
     .then((data) => {
       displayResult(data);
-      let check = checkAvailability(weatherArray, query);
-      if (check[0] == true) {
-        weatherArray.splice(check[1], 1);
+
+      //checks if query already exist in the weatherArray
+      let index = weatherArray.findIndex((item) => {
+        return item.name.toUpperCase() === query.toUpperCase();
+      });
+      if (index >= 0) {
+        weatherArray.splice(index, 1);
         weatherArray.unshift(data);
         localStorage.setItem('weatherData', JSON.stringify(weatherArray));
         getPreviousSearch(weatherArray);
@@ -111,7 +116,7 @@ function getResult(query) {
         getPreviousSearch(weatherArray);
       }
     })
-    .catch(() => {
+    .catch((error) => {
       landingPage.classList.add('invisible');
       errPage.classList.remove('invisible');
       presentResult.classList.toggle('invisible');
@@ -182,19 +187,6 @@ function generateDateAndTime(d) {
   currentTime.innerText = time;
 }
 
-function checkAvailability(arr, query) {
-  function arrOfCityNames() {
-    let cityArray = arr.map(grabCityNames);
-    return cityArray;
-  }
-  function grabCityNames(item) {
-    return item.name.toUpperCase();
-  }
-  let index = arrOfCityNames().indexOf(query.toUpperCase());
-  let ans = arrOfCityNames().some((arrVal) => query.toUpperCase() == arrVal);
-  return [ans, index];
-}
-
 function getPreviousSearch(arr) {
   let arrNew = arr.slice(1, 11);
   let newData = arrNew.map((data) => {
@@ -216,7 +208,7 @@ function getPreviousSearch(arr) {
               data.weather[0].description
             }</figcaption>
           </figure>
-        </div>    
+        </div>
         </div>`;
     }
   });

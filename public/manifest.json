@@ -1,5 +1,5 @@
 {
-  "name": "Creativogee Weather App",
+  "name": "Creativogee Weather",
   "short_name": "Creativogee Weather",
   "start_url": "index.html",
   "display": "standalone",
@@ -9,43 +9,43 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/images/icons/face-72x72.png",
+      "src": "/images/icons/weather-icon-72x72.png",
       "type": "image/png",
       "sizes": "72x72"
     },
     {
-      "src": "/images/icons/face-96x96.png",
+      "src": "/images/icons/weather-icon-96x96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "/images/icons/face-128x128.png",
+      "src": "/images/icons/weather-icon-128x128.png",
       "type": "image/png",
       "sizes": "128x128"
     },
     {
-      "src": "/images/icons/face-144x144.png",
+      "src": "/images/icons/weather-icon-144x144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "/images/icons/face-152x152.png",
+      "src": "/images/icons/weather-icon-152x152.png",
       "type": "image/png",
       "sizes": "152x152"
     },
     {
-      "src": "/images/icons/face-192x192.png",
+      "src": "/images/icons/weather-icon-192x192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/icons/face-384x384.png",
+      "src": "/images/icons/weather-icon-384x384.png",
       "type": "image/png",
       "sizes": "384x384"
     },
     {
-      "src": "/images/icons/face-512x512.png",
+      "src": "/images/icons/weather-icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
