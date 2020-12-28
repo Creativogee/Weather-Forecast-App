@@ -65,7 +65,6 @@ searchInput.addEventListener('keypress', (event) => {
 });
 
 goHome.addEventListener('click', () => {
-  console.log(weatherArray.length);
   if (weatherArray.length > 1) {
     previousSearch.classList.remove('invisible');
   }
