@@ -200,17 +200,20 @@ figure {
 }
 
 .previous-search-header {
-  font-size: 1.1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   color: #8ee4af;
 }
 
-.previous-search-header h4 {
+.previous-search-header span {
+  font-size: 1.1rem;
+  font-weight: bold;
   background-color: #05386b;
   border-radius: 3px;
-  padding: 2px 10px;
+  width: fit-content;
+  padding: 4px;
 }
 
 .header {
@@ -416,7 +419,6 @@ figure {
 
   .previous-search-header {
     font-size: 1rem;
-    padding: 1px 5px;
   }
 }
 @media only screen and (max-width: 320px) {
