@@ -49,13 +49,18 @@
         </div>
       </div>
       <p class="empty-input-error-msg hidden">Please enter a city</p>
+      <div class="loader-container hidden">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+      </div>
     </section>
 
     <!-- the result page -->
 
     <section class="present-search-result invisible">
       <div class="city-date">
-        <div class="city">loading...</div>
+        <div class="city"></div>
         <div class="date"></div>
         <div class="time"></div>
       </div>
@@ -68,25 +73,14 @@
       </div>
     </section>
 
-    <div id="hr" class="hidden">
-      <h4 class="prev-ser-head">Previous Search</h4>
-      <img class="cancel" src="./images/close.svg" alt="" />
-    </div>
-
     <!-- Previous searches -->
-    <div class="recent-search-veil">
-      <section class="recent-search-results-container">
-        <!-- <div class="recent-search-result">
-        <div class="prev-weather-card">
-        <div class="city-mini"></div>
-        <span class="temp temp-wrapper-mini"></span>
-          <figure>
-            <img class="weather-icon-mini" src=""/>
-            <figcaption class="weather-desc"></figcaption>
-          </figure>
-        </div>
-        </div> -->
-      </section>
+    <div id="previousSearch" class="invisible previous-search">
+      <div class="previous-search-header">
+        <h4>Previous Search</h4>
+        <img class="cancel" src="./images/close.svg" alt="" />
+      </div>
+
+      <section class="previous-search-results-container"></section>
     </div>
 
     <!--the error page -->
