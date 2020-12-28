@@ -11,20 +11,22 @@ const landingPage = document.querySelector('.landing-page-container');
 const presentResult = document.querySelector('.present-search-result');
 const errPage = document.querySelector('.error-page');
 let message = document.querySelector('.message');
-let previousSearch = document.querySelector('.recent-search-results-container');
 
 //Other
 let getStartedBtn = document.querySelector('.get-started-button');
 let inputField = document.querySelector('.input-field');
 let searchInput = document.querySelector('.search-input');
 let searchArrow = document.querySelector('.arrow-icon-wrapper');
+let loader = document.querySelector('.loader-container');
 let emptyError = document.querySelector('.empty-input-error-msg');
 let header = document.querySelector('.header');
 let appInfo = document.querySelector('.app-desc-CTA-wrapper');
-let previousSearchVeil = document.querySelector('.recent-search-veil');
 let closePrevSearch = document.querySelector('.cancel');
 let goHome = document.querySelector('.go-home');
-let hr = document.getElementById('hr');
+let previousSearch = document.getElementById('previousSearch');
+let previousSearchResult = document.querySelector(
+  '.previous-search-results-container'
+);
 let currentTemp = document.querySelector('.temp'); //for special use
 
 //EVENT LISTENERS
@@ -39,6 +41,11 @@ searchInput.addEventListener('input', () => {
 searchArrow.addEventListener('click', () => {
   if (searchInput.value == '') {
     emptyError.classList.remove('hidden');
+    !emptyError.classList.contains('hidden')
+      ? setTimeout(() => {
+          emptyError.classList.add('hidden');
+        }, 3000)
+      : null;
   } else if (searchInput.value !== '') {
     handleSubmit();
   }
@@ -47,59 +54,69 @@ searchArrow.addEventListener('click', () => {
 searchInput.addEventListener('keypress', (event) => {
   if (event.keyCode == 13 && searchInput.value == '') {
     emptyError.classList.remove('hidden');
+    !emptyError.classList.contains('hidden')
+      ? setTimeout(() => {
+          emptyError.classList.add('hidden');
+        }, 3000)
+      : null;
   } else if (event.keyCode == 13 && searchInput.value !== '') {
     handleSubmit();
   }
 });
 
 goHome.addEventListener('click', () => {
-  if (currentTemp.innerText == '') {
-    landingPage.classList.remove('invisible');
-    appInfo.classList.remove('invisible');
-    errPage.classList.add('invisible');
-    presentResult.classList.add('invisible');
-    previousSearchVeil.classList.add('invisible');
-    hr.classList.add('hidden');
-  } else if (weatherArray.length > 1) {
-    header.classList.remove('invisible');
-    landingPage.classList.toggle('invisible');
-    errPage.classList.toggle('invisible');
-    presentResult.classList.toggle('invisible');
-    previousSearchVeil.classList.toggle('invisible');
-    hr.classList.toggle('hidden');
-  } else {
-    landingPage.classList.toggle('invisible');
-    errPage.classList.toggle('invisible');
-    presentResult.classList.toggle('invisible');
+  console.log(weatherArray.length);
+  if (weatherArray.length > 1) {
+    previousSearch.classList.remove('invisible');
   }
+  if (weatherArray.length >= 1) {
+    presentResult.classList.remove('invisible');
+    header.classList.remove('invisible');
+    appInfo.classList.add('invisible');
+    const latestSearch = weatherArray[0];
+    displayResult(latestSearch);
+    getPreviousSearch(weatherArray);
+  }
+  if (weatherArray.length < 1) {
+    presentResult.classList.add('invisible');
+    previousSearch.classList.add('invisible');
+    appInfo.classList.remove('invisible');
+  }
+  landingPage.classList.remove('invisible');
+  errPage.classList.add('invisible');
 });
 
 closePrevSearch.addEventListener('click', () => {
   weatherArray = weatherArray.splice(0, 1);
   localStorage.clear();
-  previousSearchVeil.classList.add('invisible');
-  hr.classList.add('hidden');
+  localStorage.setItem('weatherData', JSON.stringify(weatherArray));
+  previousSearch.classList.add('invisible');
 });
 
 let weatherArray = JSON.parse(localStorage.getItem('weatherData')) || [];
 
 // FETCH QUERY FROM API
 function handleSubmit() {
-  appInfo.classList.add('invisible');
-  presentResult.classList.remove('invisible');
-  header.classList.remove('invisible');
-  emptyError.classList.add('hidden');
   getResult(searchInput.value);
   searchInput.value = '';
+  emptyError.classList.add('hidden');
 }
 
 function getResult(query) {
+  loader.classList.remove('hidden');
   fetch(`${api.base}weather?q=${query}&units=metric&appid=${api.key}`)
     .then((weather) => {
       return weather.json();
     })
     .then((data) => {
+      loader.classList.add('hidden');
       displayResult(data);
+      appInfo.classList.add('invisible');
+      presentResult.classList.remove('invisible');
+      header.classList.remove('invisible');
+      if (weatherArray.length >= 1) {
+        previousSearch.classList.remove('invisible');
+      }
 
       //checks if query already exist in the weatherArray
       let index = weatherArray.findIndex((item) => {
@@ -119,10 +136,9 @@ function getResult(query) {
     .catch((error) => {
       landingPage.classList.add('invisible');
       errPage.classList.remove('invisible');
-      presentResult.classList.toggle('invisible');
-      previousSearchVeil.classList.add('invisible');
+      presentResult.classList.add('invisible');
       header.classList.add('invisible');
-      hr.classList.add('hidden');
+      previousSearch.classList.add('invisible');
     });
 }
 
@@ -147,13 +163,6 @@ function displayResult(weather) {
   //weather description
   let desc = document.querySelector('.weather-desc');
   desc.innerText = weather.weather[0].description;
-
-  previousSearchVeil.classList.remove('invisible');
-  if (weatherArray.length <= 1) {
-    return true;
-  } else {
-    hr.classList.remove('hidden');
-  }
 }
 
 function generateDateAndTime(d) {
@@ -193,7 +202,6 @@ function getPreviousSearch(arr) {
     if (arrNew.length == 0) {
       return;
     } else {
-      hr.classList.remove('hidden');
       return `<div class="recent-search-result">
         <div class="prev-weather-card">
         <div class="city city-mini">${data.name}, ${data.sys.country}</div>
@@ -213,7 +221,7 @@ function getPreviousSearch(arr) {
     }
   });
   newData = newData.join('');
-  previousSearch.innerHTML = newData;
+  previousSearchResult.innerHTML = newData;
 }
 
 // made with love by creativogee
