@@ -108,6 +108,7 @@ body {
 
 .city-mini {
   font-size: 1.2rem;
+  height: 44px;
 }
 
 .temp-wrapper {
@@ -187,7 +188,7 @@ figure {
 .previous-search-results-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: left; */
   margin: 0 auto 2rem;
 }
 
@@ -195,6 +196,7 @@ figure {
   padding-top: 3px;
   width: 80%;
   margin: 3rem auto 0;
+
   color: #05386b;
   border-top: 1.5px solid;
 }
@@ -204,16 +206,12 @@ figure {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  color: #8ee4af;
 }
 
 .previous-search-header span {
   font-size: 1.1rem;
   font-weight: bold;
-  background-color: #05386b;
-  border-radius: 3px;
   width: fit-content;
-  padding: 4px;
 }
 
 .header {
@@ -291,11 +289,6 @@ figure {
   }
 }
 
-@media only screen and (max-width: 1190px) {
-  .recent-search-result {
-    width: 30%;
-  }
-}
 @media only screen and (max-width: 850px) {
   .city-mini {
     font-size: 1.1rem;
@@ -412,16 +405,20 @@ figure {
   }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 365px) {
   .prev-weather-card {
     height: 11.5rem;
   }
 
-  .previous-search-header {
+  .cancel {
+    width: 30px;
+    height: 30px;
+  }
+  .previous-search-header span {
     font-size: 1rem;
   }
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 330px) {
   .prev-weather-card {
     height: 12.5rem;
   }
